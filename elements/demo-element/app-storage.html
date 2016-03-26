@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<!--Imports go here-->
+
+<dom-module id="app-storage">
+
+   <template>
+      <style is="custom-style">
+         :host {
+            display: block;
+         }
+      </style>
+
+      <iron-ajax id="loadAjax" url="/api/load" handle-as="json" on-response="_loaded" last-response="{{loadedData}}" debounce-duration="300"></iron-ajax>
+      <iron-ajax id="saveAjax" method="POST" content-type="application/json" url="/api/save" on-response="_saved" debounce-duration="300"></iron-ajax>
+   </template>
+
+   <script>
+      "use strict";
+      Polymer({
+         is: "app-storage",
+         properties: {
+            loadedData: {
+               type: "Object",
+               value: {}
+            }
+         },
+         _loaded(e) {
+            this.fire("loaded", this.loadedData);
+         },
+         load(path) {
+            this.$.loadAjax.params = {
+               id: path
+            };
+            this.$.loadAjax.generateRequest();
+         },
+         _saved(e){
+            console.log(e);
+         },
+         save(path, data) {
+            this.$.saveAjax.params = {
+               id: path
+            };
+            this.$.saveAjax.body = data;
+            this.$.saveAjax.generateRequest();
+         }
+      });
+   </script>
+
+</dom-module>

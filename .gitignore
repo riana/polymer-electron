@@ -1,0 +1,4 @@
+bin-dist
+bower_components
+dist
+node_modules
