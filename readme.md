@@ -11,19 +11,23 @@ Download the project then :
    bower install
 ```
 
+## Start the app
 
-Start local server, store data in *local folder* :
+Start local server:
+
 ```
    npm test
    http://localhost:32102/
 ```
 
-Start vulcanized app with electron, store data in *production folder* and serve @32101 :
+Start the vulcanized app with electron, uses *electron-prebuilt* :
 ```
    npm start
 ```
 
-Create binary package:
+## Create a binary distribution
+
+This will vulcanize the Polymer app, and package the app with *electron-packager*. Packaging options are defined directly inside the gulpfile.
 
 ```
    gulp pkg
